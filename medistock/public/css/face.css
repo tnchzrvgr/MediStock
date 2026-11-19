@@ -1,0 +1,241 @@
+/* camera pages: login step 2 and Register Face */
+.cam-box {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 4 / 3;
+    margin: 0 auto 14px auto;
+    background-color: #0f172a;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.cam-box video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+}
+
+.cam-box .cam-oval {
+    position: absolute;
+    top: 8%;
+    left: 28%;
+    width: 44%;
+    height: 80%;
+    border: 3px dashed rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+}
+
+.cam-message {
+    min-height: 22px;
+    margin: 0 0 14px 0;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f766e;
+}
+
+.cam-message.cam-error {
+    color: #dc2626;
+}
+
+.cam-note {
+    margin: 0 0 14px 0;
+    text-align: center;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.face-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.face-step {
+    display: flex;
+    gap: 14px;
+}
+
+.step-badge {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #e2e8f0;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-badge.step-done {
+    background-color: #0f766e;
+    color: #ffffff;
+}
+
+.face-step h4 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    color: #1e293b;
+}
+
+.face-step p {
+    margin: 0 0 10px 0;
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.face-step .step-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.id-preview {
+    display: none;
+    max-width: 220px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.consent-row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 12px;
+    color: #475569;
+    line-height: 1.5;
+}
+
+.face-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .face-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.btn-signin:disabled,
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.cam-note a {
+    color: #0f766e;
+    font-weight: 600;
+}
+
+/* User Management: Face ID column (status on top, links below) */
+.face-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 13px;
+}
+
+.face-cell .face-links {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.face-cell .face-links a,
+.face-cell .face-links .link-btn {
+    color: #0f766e;
+}
+
+.data-table td.cell-email {
+    overflow-wrap: anywhere;
+    max-width: 210px;
+}
+
+.face-cell .status-green {
+    color: #16a34a;
+    font-weight: 600;
+}
+
+.face-cell .face-links a {
+    text-decoration: none;
+}
+
+/* login face page: the other way (ID) and the back link */
+.alt-way {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+.alt-way .alt-text {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.btn-alt {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #0f766e;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #0f766e;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-alt:hover {
+    background-color: #f0fdfa;
+}
+
+.back-link {
+    margin: 20px 0 0 0;
+    text-align: center;
+    font-size: 13px;
+}
+
+.back-link a {
+    color: #64748b;
+    font-weight: 600;
+}
+
+.cam-message {
+    margin-bottom: 16px;
+}
+
+/* login ID way: choose a photo file of the ID */
+.id-upload {
+    display: none;
+    margin-top: 16px;
+    padding: 12px;
+    border: 1px dashed #94a3b8;
+    border-radius: 8px;
+    background-color: #f8fafc;
+    text-align: center;
+}
+
+.id-upload .alt-text {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: #475569;
+}
+
+.id-upload input {
+    max-width: 100%;
+    font-size: 12px;
+}
