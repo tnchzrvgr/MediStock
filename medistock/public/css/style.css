@@ -63,8 +63,7 @@ body {
     display: block;
     width: 32px;
     height: 32px;
-    border-radius: 50%;
-    background-color: var(--primary-500);
+    border-radius: 8px;
 }
 
 .logo-text {
@@ -2304,3 +2303,42 @@ body {
 .flash-info{border:1px solid #bfdbfe;padding:14px 18px;line-height:1.5}
 
 .table-card .form-actions { margin-top: 18px; }
+
+/* ---------- small screens: wide tables scroll sideways instead of squeezing ---------- */
+@media (max-width: 900px) {
+    .data-table:has(th:nth-child(5)) {
+        min-width: 560px;
+    }
+
+    .data-table:has(th:nth-child(6)) {
+        min-width: 700px;
+    }
+
+    .data-table:has(th:nth-child(8)) {
+        min-width: 860px;
+    }
+
+    .data-table {
+        table-layout: auto;
+    }
+
+    .data-table th,
+    .data-table td {
+        white-space: nowrap;
+        padding-right: 16px;
+    }
+
+    .form-columns {
+        align-items: stretch;
+    }
+
+    .detail-main,
+    .detail-main .card {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .table-wrap {
+        -webkit-overflow-scrolling: touch;
+    }
+}

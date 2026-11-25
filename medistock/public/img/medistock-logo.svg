@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 220" width="1800" height="440">
+<g transform="translate(10,10)"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14b8a6"/><stop offset="1" stop-color="#0f766e"/></linearGradient></defs>
+<rect width="200" height="200" rx="44" fill="url(#g)"/>
+<g fill="#ffffff" fill-opacity="0.38"><rect x="36" y="140" width="24" height="26" rx="6"/><rect x="70" y="124" width="24" height="42" rx="6"/><rect x="104" y="108" width="24" height="58" rx="6"/><rect x="138" y="90" width="24" height="76" rx="6"/></g>
+<g transform="rotate(-40 100 66)"><rect x="40" y="38" width="120" height="56" rx="28" fill="#ffffff"/><path d="M100 38 H132 A28 28 0 0 1 132 94 H100 Z" fill="#99f6e4"/><rect x="98" y="38" width="4" height="56" fill="#0f766e" fill-opacity="0.25"/></g></g>
+<text x="235" y="118" font-family="Poppins, Montserrat, Arial, sans-serif" font-size="82" font-weight="700" fill="#0b1f2a">Medi<tspan fill="#0d9488">Stock</tspan></text>
+<text x="238" y="160" font-family="Arial, sans-serif" font-size="22" letter-spacing="3" fill="#475569">PHARMACY INVENTORY &amp; SALES ANALYSIS</text>
+</svg>

@@ -30,7 +30,7 @@ if (is_admin()) {
 @endphp
 <div class="sidebar" id="sidebar">
     <div class="sidebar-logo">
-        <span class="logo-circle"></span>
+        <img src="{{ asset('img/medistock-icon.svg') }}" class="logo-circle" alt="MediStock logo">
         <span class="logo-text">MediStock</span>
     </div>
 
