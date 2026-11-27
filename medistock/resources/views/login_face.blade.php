@@ -55,16 +55,6 @@
                     <button type="button" id="btnStart" class="btn-signin">Start face check</button>
                 </form>
 
-                <div class="id-upload" id="idUpload">
-                    <span class="alt-text">Choose a clear photo of your ID (straight, no glare):</span>
-                    <input type="file" id="idFile" accept="image/*">
-                </div>
-
-                <div class="alt-way" id="altWay">
-                    <span class="alt-text">Face check not working?</span>
-                    <button type="button" id="btnIdMode" class="btn-alt">Use my National ID instead</button>
-                </div>
-
                 <p class="back-link"><a href="{{ route('login') }}">Back to login</a></p>
             </div>
         </div>

@@ -1,10 +1,9 @@
 // Register Face page (resources/views/face_enroll.blade.php)
-// Step 1: live face + head turn   Step 2: face on the National ID   Step 3: consent and save
+// Step 1: face scan (look straight, turn the head left and right)   Step 2: consent and save
 
 var video = document.getElementById("cam");
 var camMessage = document.getElementById("camMessage");
 var liveNumbers = null;     // the live face (128 numbers)
-var idNumbers = null;       // the face on the ID (128 numbers)
 var cameraOn = false;
 
 function say(text, isError) {
@@ -19,16 +18,8 @@ function stepDone(number, done) {
 }
 
 function updateSaveButton() {
-    var ok = liveNumbers != null && idNumbers != null && document.getElementById("consent").checked;
+    var ok = liveNumbers != null && document.getElementById("consent").checked;
     document.getElementById("btnSave").disabled = !ok;
-}
-
-async function openCamera() {
-    await FaceTools.loadModels(FACE_PAGE.modelsUrl);
-    if (!cameraOn) {
-        await FaceTools.startCamera(video);
-        cameraOn = true;
-    }
 }
 
 // ----- step 1: the live face -----
@@ -39,7 +30,11 @@ document.getElementById("btnLive").addEventListener("click", async function () {
     stepDone(1, false);
     try {
         say("Loading the face program...");
-        await openCamera();
+        await FaceTools.loadModels(FACE_PAGE.modelsUrl);
+        if (!cameraOn) {
+            await FaceTools.startCamera(video);
+            cameraOn = true;
+        }
 
         var result = await FaceTools.waitForTurn(video, say, 25);
 
@@ -53,7 +48,7 @@ document.getElementById("btnLive").addEventListener("click", async function () {
         }
         liveNumbers = FaceTools.average(list);
         stepDone(1, true);
-        say("Live face captured. Now do step 2.");
+        say("Face captured. Now tick the consent box and save.");
     } catch (e) {
         say(e.message, true);
     }
@@ -61,62 +56,9 @@ document.getElementById("btnLive").addEventListener("click", async function () {
     updateSaveButton();
 });
 
-// ----- step 2: the National ID -----
-async function readIdFrom(source, preview) {
-    idNumbers = null;
-    stepDone(2, false);
-    try {
-        await FaceTools.loadModels(FACE_PAGE.modelsUrl);
-        say("Looking for the face on the ID...");
-        var result = await FaceTools.detectOnId(source);
-        if (result == null) {
-            say("No face was found on the ID. Hold the card flat, in good light, with the photo clear.", true);
-        } else {
-            idNumbers = result.descriptor;
-            // show the ID turned upright (the way the program read it)
-            document.getElementById("idPreview").src = result.preview;
-            document.getElementById("idPreview").style.display = "block";
-            stepDone(2, true);
-            say("The face on the ID was found.");
-        }
-    } catch (e) {
-        say(e.message, true);
-    }
-    updateSaveButton();
-}
-
-// scan with the camera: hold the ID in front of the camera, then press the button
-document.getElementById("btnIdCamera").addEventListener("click", async function () {
-    try {
-        await openCamera();
-    } catch (e) {
-        say(e.message, true);
-        return;
-    }
-    var canvas = document.createElement("canvas");
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    canvas.getContext("2d").drawImage(video, 0, 0);
-    await readIdFrom(canvas, canvas.toDataURL("image/jpeg", 0.8));
-});
-
-// or choose a photo of the ID from the computer
-document.getElementById("idFile").addEventListener("change", function () {
-    var file = this.files[0];
-    if (!file) {
-        return;
-    }
-    var url = URL.createObjectURL(file);
-    var image = new Image();
-    image.onload = function () {
-        readIdFrom(image, url);
-    };
-    image.src = url;
-});
-
 document.getElementById("consent").addEventListener("change", updateSaveButton);
 
-// ----- step 3: save -----
+// ----- step 2: save -----
 document.getElementById("btnSave").addEventListener("click", async function () {
     var button = this;
     button.disabled = true;
@@ -124,7 +66,6 @@ document.getElementById("btnSave").addEventListener("click", async function () {
         var answer = await FaceTools.postJson(FACE_PAGE.saveUrl, {
             user_id: FACE_PAGE.userId,
             descriptor: liveNumbers,
-            id_descriptor: idNumbers,
             consent: document.getElementById("consent").checked
         });
         if (answer.ok) {

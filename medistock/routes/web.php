@@ -17,6 +17,7 @@ use App\Http\Controllers\BackupController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\RegisterController;
 
 // ---------- login and logout ----------
 Route::get('/', function () {
@@ -79,6 +80,7 @@ Route::middleware('login')->group(function () {
         Route::post('/users/face', [FaceController::class, 'enrollSave'])->name('face.enroll.save');
         Route::post('/users/face/remove', [FaceController::class, 'remove'])->name('face.remove');
 
+
         // void or return a sale
         Route::post('/transactions/change', [TransactionController::class, 'change'])->name('transactions.change');
 
@@ -96,4 +98,21 @@ Route::middleware('login')->group(function () {
         Route::post('/backup/restore', [BackupController::class, 'restoreHistory'])->name('backup.restore');
         Route::get('/backup/download/{id}', [BackupController::class, 'download'])->name('backup.download');
     });
+});
+Route::middleware(['login', 'admin'])->prefix('users/new')->group(function () {
+    Route::get('/', [RegisterController::class, 'start'])->name('register');                    // step 2: choose kind of ID
+    Route::post('/consent', [RegisterController::class, 'consent'])->name('register.consent');
+    Route::get('/reset', [RegisterController::class, 'reset'])->name('register.reset');
+
+    Route::get('/id', [RegisterController::class, 'idPage'])->name('register.id');              // step 3-4: upload + extraction
+    Route::post('/id', [RegisterController::class, 'idSave'])->name('register.id.save');
+
+    Route::get('/face', [RegisterController::class, 'facePage'])->name('register.face');        // step 5: face recognition + matching
+    Route::post('/face', [RegisterController::class, 'faceMatch'])->name('register.face.match');
+
+    Route::get('/info', [RegisterController::class, 'infoPage'])->name('register.info');        // step 6: personal information
+    Route::post('/info', [RegisterController::class, 'infoSave'])->name('register.info.save');
+
+    Route::get('/done', [RegisterController::class, 'done'])->name('register.done');
+
 });

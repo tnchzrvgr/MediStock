@@ -59,7 +59,7 @@
         <div class="card table-card">
             <div class="card-head">
                 <h3 class="card-title">User Accounts</h3>
-                <a href="{{ route('users.form') }}" class="btn btn-primary">+ Add User</a>
+                <a href="{{ route('register') }}" class="btn btn-primary">+ Add User</a>
             </div>
 
             <div class="table-wrap">
